@@ -30,6 +30,18 @@ python run.py
 - **M** – pokaż ostatnie wykresy (jeśli istnieją)
 - **ESC** – wyjście
 
+## Skrypty benchmarkowe
+
+```bash
+# 4 scenariusze (diag × wagi), wykresy + CSV
+python scripts/bench_all.py
+
+# Density sweep – wpływ gęstości przeszkód na A*/Dijkstra
+python scripts/density_sweep.py
+```
+
+Wyniki zapisywane do `bench_S1/`–`bench_S4/` oraz `density_sweep/`.
+
 ## Struktura projektu
 
 ```
@@ -49,6 +61,9 @@ shortest_path_viz/
 │       ├── heuristics.py
 │       ├── metrics.py
 │       └── timer.py
+├── scripts/
+│   ├── bench_all.py
+│   └── density_sweep.py
 ├── run.py
 ├── requirements.txt
 └── README.md

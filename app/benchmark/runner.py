@@ -11,13 +11,13 @@ from app.utils.heuristics import manhattan, octile, scaled
 
 @dataclass
 class TrialConfig:
-    cols: int = 300
-    rows: int = 200
+    cols: int = 100
+    rows: int = 100
     diag: bool = False
-    wall_density: float = 0.3
+    wall_density: float = 0.25
     weight_density: float = 0.0
     weight_value: int = 5
-    trials: int = 20
+    trials: int = 30
     seed: int = 123
 
 def run_bench(cfg: TrialConfig) -> Dict[str, List[Dict[str, Any]]]:
@@ -54,6 +54,7 @@ def run_bench(cfg: TrialConfig) -> Dict[str, List[Dict[str, Any]]]:
             "frontier_peak": rD.frontier_peak,
             "path_len": rD.path_length(),
             "total_cost": rD.total_cost,
+            "b_star": rD.effective_branching_factor(),
         })
 
 
@@ -70,6 +71,7 @@ def run_bench(cfg: TrialConfig) -> Dict[str, List[Dict[str, Any]]]:
                     "frontier_peak": r.frontier_peak,
                     "path_len": r.path_length(),
                     "total_cost": r.total_cost,
+                    "b_star": r.effective_branching_factor(),
                 })
             except Exception as e:
                 results["BFS"].append({"error": str(e)})
@@ -87,6 +89,7 @@ def run_bench(cfg: TrialConfig) -> Dict[str, List[Dict[str, Any]]]:
             "frontier_peak": rA.frontier_peak,
             "path_len": rA.path_length(),
             "total_cost": rA.total_cost,
+            "b_star": rA.effective_branching_factor(),
         })
 
     print(f"\n=== STATYSTYKI BENCHMARKU ===")
